@@ -1,18 +1,7 @@
 # Code for 2020 China Hualu Cup Data Lake Algorithm Competition (Lane Detection Track)
 
 ## Introduction
-This repo contains the **first** place solution by the Incredible@NTU team for the Lane Detection Track of the 2020 China Hualu Cup Data Lake Algorithm
-Competition. For more information about this task, we refer you to the 
-official [website](https://dev.ehualu.com/dev/home/competition/competitionDetail?competitionId=1). In this competion, 
-We adopt the [ERFNet](http://www.robesafe.uah.es/personal/eduardo.romera/pdfs/Romera17tits.pdf) as our base
-model for its lightweight and large receptive field, which are critical factors in this task. Furthermore, we perform 
-data cleaning, sky removing and weighted crossentropy loss as the main techniques along with several other tricks to 
-achieve the compelling performance (42.25 mIoU on Final testB) in a highly efficient manner. No model ensemble is used 
-in our solution. Finally, our solution won the champion out of 576 teams in this competition. An overview 
-of our solution is available [here](https://pan.baidu.com/s/1UbcY6fa8h44aLljK-t8HOg) (passwd: shid).
-
-## Updates
-- Add `visualization.py` for label visualization. See [utils/README.md](utils/README.md) for details. (04/01/2021)
+Lane-Detection-with-ERFNet based paddlepaddle_v2.5
 
 ## Contents
 1. [Installation](#installation)
@@ -21,11 +10,11 @@ of our solution is available [here](https://pan.baidu.com/s/1UbcY6fa8h44aLljK-t8
 4. [Evaluation](#evaluation)
 
 ## Installation
-- [Anaconda3](https://repo.anaconda.com/archive/Anaconda3-2020.07-Linux-x86_64.sh)
-- [PaddlePaddle 1.8.5](https://www.paddlepaddle.org.cn/documentation/docs/en/install/install_Ubuntu_en.html)
-- OpenCV 4.2.0.32
-- CUDA 10.0 or 10.1
-- cuDNN 7.6.5
+- [Anaconda3]
+- [PaddlePaddle 2.5.0]
+- OpenCV 4.8.0.74
+- CUDA 11.2.2
+- cuDNN 8.2.1.32
 - TensorBoard (optional)
 - pycocotools (optional)
 
@@ -42,26 +31,13 @@ For your convenience, we wrap up the installation process with the following com
 
 ```Shell
 conda create -n paddle python=3.7 -y && conda activate paddle
-pip install opencv-python==4.2.0.32
-python -m pip install paddlepaddle-gpu==1.8.5.post107 -i https://mirror.baidu.com/pypi/simple
+pip install opencv-python==xxxx
+python -m pip install paddlepaddle-gpu==xxx
 pip install pycocotools
 ```
 
 ## Datasets
-We first construct our training set by combining the training data released in the preliminary and final round, which
-consists of 15,503 training images in total. After that, data cleaning and preprocessing techniques (as described below)
-are conducted to obtain higher quality training samples, resulting in 15,170 training images finally.
-
-1. We manually filter out or re-label those wrongly annotated images. It can be roughly divided into three types,
- i.e., wrong annotation, wrong class label and miss label. For wrong annotation, it's shown on the left that a weird
-  triangle (green) appears in the middle of the image with no actual lanes annotated. In the middle, the 
-  left-dashed-right-solid line (highlighted in yellow) is annotated as left-solid-right-dashed one, which is deemed as 
-  wrong class label. The last image belongs to miss label case since the dashed yellow line is missed.
-2. There also exists some duplicate images with different annotation label maps. In this case, we manually select 
-the one we regard owns the best annotation map and ignore all the rest.
-3. We resize all the images to the same size of 1280*720 to reduce data loading time.
-
-![wrongly annotated examples](examples/example.jpg)
+TRoM
 
 We assume the directory layout for the competition dataset `PreliminaryData` as below.
 
